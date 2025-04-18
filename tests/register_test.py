@@ -6,6 +6,7 @@ from dotenv import load_dotenv
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from pages.register_page import QaharborRegisterPage
+from pages.login_page import QaharborLoginPage
 
 
 
@@ -26,3 +27,12 @@ def test_register(browser):
     register_page.enter_confirm_password(CONFIRM_PASSWORD)
     register_page.submit_register_button()
     assert register_page.is_registration_successful(), "register failed!"
+
+
+    login_page = QaharborLoginPage(browser)
+    login_page.go_to_login_page("https://labsqajobs.qaharbor.com/login/")
+    login_page.enter_email(EMAIL_ADDRESS)
+    login_page.enter_password(PASSWORD)
+    login_page.click_login()
+
+    assert login_page.is_login_successful(), "Login failed!"
