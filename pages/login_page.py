@@ -11,17 +11,17 @@ class QaharborLoginPage:
         self.driver.get(url)
 
     def enter_email(self, email):
-        self.wait.until(EC.presence_of_element_located((By.ID, "user_login"))).send_keys(email)
+        self.wait.until(EC.presence_of_element_located((By.XPATH, "//input[@id='email']"))).send_keys(email)
 
     def enter_password(self, password):
-        self.driver.find_element(By.ID, "user_pass").send_keys(password)
+        self.driver.find_element(By.XPATH, "//input[@id='password']").send_keys(password)
 
     def click_login(self):
-        self.driver.find_element(By.ID, "wp-submit").click()
+        self.driver.find_element(By.XPATH, "//button[text()='Login']").click()
 
     def is_login_successful(self):
         try:
-            self.wait.until(EC.presence_of_element_located((By.LINK_TEXT, "Logout")))
+            self.wait.until(EC.presence_of_element_located((By.XPATH, "//span[text()='Log Out']")))
             return True
         except:
             return False

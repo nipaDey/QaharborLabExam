@@ -1,6 +1,8 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.action_chains import ActionChains
+
 import time
 
 
@@ -34,13 +36,12 @@ class QaharborRegisterPage:
     def submit_register_button(self):
         button = self.wait.until(EC.presence_of_element_located((By.XPATH, "//button[text()='REGISTER NOW']")))
 
+        actions = ActionChains(self.driver)
+        actions.move_to_element(button).perform()
 
-        self.driver.execute_script("arguments[0].scrollIntoView(true);", button)
+        button.click()
 
-
-        self.driver.execute_script("arguments[0].click();", button)
-
-        time.sleep(2)
+        time.sleep(5)
 
     def is_registration_successful(self):
         try:
